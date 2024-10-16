@@ -177,6 +177,20 @@ class funbox:
         time.sleep(0.5)
         self.nullcontents()
         return None
+    def robingoodchoice():
+        sleep_print("Хочешь ада?")
+        anwser = input("(y/n): ")
+        if not anwser.find("y") != -1:
+            while True:
+                print("A", end="")
+        elif not anwser.find("n") != -1:
+            print("Ок, не буду)")
+        else:
+            print("????")
+    def tracebackTroll():
+        for i in range(100):
+                print("ХA", end="")
+        raise Exception("АХАХАХА! С ПЕРВЫМ АПРЕЛЯ ПЕДРИЛА!")
 class eater:
     def __init__(self):
         pass
