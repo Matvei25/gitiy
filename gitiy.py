@@ -7,7 +7,6 @@ import numpy
 import re
 import typing
 import rich
-# not finished
 null = None
 nullnum = 0.0 + 0.0j
 nullstr = ""
@@ -15,6 +14,22 @@ nullbool = False
 nulllist = []
 nulltuple = ()
 nulldict = {}
+def random_str(k):
+    pass
+    k = input()
+    ''.join(random.choice(string.ascii_letters + string.digits), k)
+class human:
+    def __init__(self, name, age, education, skills):
+        self.name = name
+        self.age = age
+        self.education = education
+        self.skills = skills
+        self.is_criminal = False
+    def make_criminal(self):
+        self.is_criminal = True
+        print(f'{self.name} стал преступником!')
+        self.education = 'Уголовное дело'
+        self.skills = ['Убийство', 'Бандитизм', 'Ограбление']
 class mathbox:
     pi = 3.141592653589793
     e = 2.718281828459045
