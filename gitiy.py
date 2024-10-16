@@ -7,6 +7,7 @@ import numpy
 import re
 import typing
 import rich
+import string
 null = None
 nullnum = 0.0 + 0.0j
 nullstr = ""
