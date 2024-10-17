@@ -327,3 +327,18 @@ class gitiybox:
                 requests.get()
         else:
             print(f"Chat '{chat}' not found in gitiybox.")
+    def remove(chat, party):
+        if chat in party.partyGroup:
+            print(f"Removing chat '{chat}' from party.")
+            party.partyGroup.remove(chat)
+        else:
+            print(f"Chat '{chat}' not found in party.")
+    def clear(party):
+        print("Clearing gitiybox...")
+    def chat_history(chat):
+        if chat in gitiybox:
+            print(f"Chat history for chat '{chat}':")
+            for message in gitiybox[chat]:
+                print(message)
+        else:
+            print(f"Chat '{chat}' not found in gitiybox.")
