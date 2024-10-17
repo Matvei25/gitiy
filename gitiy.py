@@ -1,6 +1,7 @@
 import random
 import time
 import math
+import decimal
 import cmath
 import os
 import numpy
@@ -14,8 +15,6 @@ import mpmath
 import matplotlib
 import datetime
 import requests
-import discord
-from discord.ext import commands
 import json
 import http
 import socket
@@ -53,6 +52,51 @@ def random_str(k: str) -> str:
 def random_str_char_groups(k: int) -> str:
     char_group = random.choice(list(char_groups.keys()))
     return ''.join(random.choice(char_groups[char_group]) for _ in range(k))
+class config:
+    @staticmethod
+    def get_config(key: str) -> str:
+        with open('config.json', 'r') as file:
+            config = json.load(file)
+        return config.get(key, "")
+    @staticmethod
+    def set_config(key: str, value: str) -> None:
+        with open('config.json', 'r') as file:
+            config = json.load(file)
+        config[key] = value
+        with open('config.json', 'w') as file:
+            json.dump(config, file)
+            print(f'Конфигурация изменена: {key} -> {value}')
+            print('Сохранено')
+    @staticmethod
+    def add_to_config(key: str, value: str) -> None:
+        with open('config.json', 'r') as file:
+            config = json.load(file)
+        config.setdefault(key, []).append(value)
+        with open('config.json', 'w') as file:
+            json.dump(config, file)
+            print(f'Добавлено значение {value} к ключу {key}')
+            print('Сохранено')
+class io:
+    @staticmethod
+    def read(filename: str) -> str:
+        with open(filename, 'r') as file:
+            return file.read()
+        return ""
+    @staticmethod
+    def write(filename: str, data: str) -> None:
+        with open(filename, 'w') as file:
+            file.write(data)
+    @staticmethod
+    def append(filename: str, data: str) -> None:
+        with open(filename, 'a') as file:
+            file.write(data)
+    @staticmethod
+    def delete(filename: str) -> None:
+        os.remove(filename)
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+    @staticmethod
+    def exists(filename: str) -> bool:
+        return os.path.exists(filename)
 class human:
     def __init__(self, name, age, education, skills):
         self.name = name
@@ -69,6 +113,7 @@ class mathbox:
     pi = 3.141592653589793
     e = 2.718281828459045
     fi = 1.618033988749894
+    strange0304 = 0.30000000000000004
     plank = 6.67430e-11
     inf = numpy.inf
     neginf = -( numpy.inf )
@@ -130,11 +175,20 @@ class mathbox:
             return n * math.factorial(n-1)
     def power(base, exponent):
         return base ** exponent
-    def fibonacci_iterative(n):
-        fib_seq = [0, 1]
-        for i in range(2, n):
-            fib_seq.append(fib_seq[i-1] + fib_seq[i-2])
-        return fib_seq
+    def recurcive(i):
+        if i == 0:
+            return 0
+        elif i == 1:
+            return 1
+        else:
+            return mathbox.recurcive(i-1) + mathbox.recurcive(i-2)
+    def fractal(i, n, c, z):
+        if i == 0:
+            return c
+        else:
+            return mathbox.fractal(i-1, n, c, z * z + c)
+    def numFloatPointMath():
+        return decimal.Decimal(1) / decimal.Decimal(0.3) * (decimal.Decimal(2) ** decimal.Decimal(1000000))
 class theoryofeverything:
     def euler_phi_function(n):
         phi = n
@@ -193,6 +247,8 @@ def sleep_print(message, duration=0.1):
         time.sleep(duration)
     print("\n")
 class funbox:
+    mcmusic = 0xC418
+    bbmusic = 0xCA98
     def __init__(self):
         pass
     def pop(self):
@@ -205,10 +261,6 @@ class funbox:
         raise ExceptionGroup(f"{float}")
     nullcontents = []
     partyGroup = []
-    partyGroup.config = {
-        "alone?": False,
-        "richNeeded?": False
-    }
     def nullcontents(self):
         return rich.print("Funbox is empty.")
     
@@ -239,6 +291,7 @@ class funbox:
     def tracebackTroll():
         for i in range(100):
                 print("ХA", end="")
+                print("\n")
         raise Exception("АХАХАХА! С ПЕРВЫМ АПРЕЛЯ ПЕДРИЛА!")
 class eater:
     def __init__(self):
@@ -299,28 +352,6 @@ class turtle_demos:
             turtle_demos.joe.color(random.choice(["red", "green", "blue", "yellow", "lightblue", "pink"]))
     def draw_circle(self, radius=90):
         self.joe.circle(radius)
-class bots:
-    def __init__(self):
-        pass
-    def startdcbot(api_key=""):
-        intents = discord.Intents.default()
-        intents.messages = True
-        bot = commands.Bot(command_prefix="/", intents=intents)
-        @bot.event
-        async def on_ready():
-            print(f"Мы вошли как {bot.user}")
-        @bot.event
-        async def on_message(message):
-            if message.author == bot.user:
-                return
-            try:
-                generated_text = 1
-                response = generated_text[0]["generated_text"]
-            except Exception as e:
-                response = f"Ошибка генерации текста: {e}"
-            await message.channel.send(response)
-        TOKEN = api_key
-        bot.run(TOKEN)
 class gitiybox:
     def __init__(self):
         self.gitiybox = []
