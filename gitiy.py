@@ -234,7 +234,7 @@ class surreal:
         else:
             return surreal(self.real * other, self.imaginary * other)
     
-    def __div__(self, other):
+    def __truediv__(self, other):
         if isinstance(other, surreal):
             denominator = other.real**2 + other.imaginary**2
             real = (self.real * other.real + self.imaginary * other.imaginary) / denominator
