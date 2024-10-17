@@ -13,15 +13,20 @@ import numpy
 import mpmath
 import matplotlib
 import datetime
+import requests
+import discord
+from discord.ext import commands
 import json
 import http
 import socket
 import socketserver
 import tkinter
+import pygame
 import subprocess
 import turtle
 import turtledemo
 import csv
+import __future__
 null = None
 nullnum = 0.0 + 0.0j
 nullstr = ""
@@ -29,10 +34,26 @@ nullbool = False
 nulllist = []
 nulltuple = ()
 nulldict = {}
-def random_str(k):
+char_groups = {
+    "russian": "абвгдежзийклмнопрстуфхцчшщъыьэюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ",
+    "english": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "empty": "",
+    "numbers": "0123456789",
+    "symbols": "!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~",
+    "finance": "$£€¢₽₹¥₱₿",
+    "math": "+-*/=<>≠≤≥",
+    "science": "∞∑∏∫≡≠≈",
+    "programmer": "<>{}[]()#@&|\\"
+}
+def nullCheck(null: typing.Any) -> bool:
+    return null == nullnum or null == nullstr or null == nullbool or null == nulllist or null == nulltuple or null == nulldict
+def random_str(k: str) -> str:
     pass
     k = input()
     ''.join(random.choice(string.ascii_letters + string.digits), k)
+def random_str_char_groups(k: int) -> str:
+    char_group = random.choice(list(char_groups.keys()))
+    return ''.join(random.choice(char_groups[char_group]) for _ in range(k))
 class human:
     def __init__(self, name, age, education, skills):
         self.name = name
@@ -158,9 +179,18 @@ class funbox:
         time.sleep(0.5)
         print("Pop!")
         return random.randint(1, 100)
+    def float_swim():
+        print(f"{float} далеко уплыл!")
+        raise ExceptionGroup(f"{float}")
     nullcontents = []
+    partyGroup = []
+    partyGroup.config = {
+        "alone?": False,
+        "richNeeded?": False
+    }
     def nullcontents(self):
         return rich.print("Funbox is empty.")
+    
     def push(self, item):
         rich.print(f"Pushing {item} into funbox...")
         time.sleep(0.5)
@@ -232,3 +262,68 @@ class __class__:
         return a == b
     def __ne__(self, other, a, b):
         return a != b
+class turtle_demos:
+    scr = turtle.Screen()
+    joe = turtle.Turtle()
+    def __init__(self):
+        self.turtles = [self.joe]
+    def draw_square(self, length=90):
+        for _ in range(4):
+            self.joe.forward(length)
+            self.joe.right(90)
+    def chaos():
+        for _ in range(10):
+            turtle_demos.joe.forward(random.randint(10, 200))
+            turtle_demos.joe.right(random.randint(0, 360))
+            turtle_demos.joe.color(random.choice(["red", "green", "blue", "yellow", "lightblue", "pink"]))
+    def draw_circle(self, radius=90):
+        self.joe.circle(radius)
+class bots:
+    def __init__(self):
+        pass
+    def startdcbot(api_key=""):
+        intents = discord.Intents.default()
+        intents.messages = True
+        bot = commands.Bot(command_prefix="/", intents=intents)
+        @bot.event
+        async def on_ready():
+            print(f"Мы вошли как {bot.user}")
+        @bot.event
+        async def on_message(message):
+            if message.author == bot.user:
+                return
+            try:
+                generated_text = 1
+                response = generated_text[0]["generated_text"]
+            except Exception as e:
+                response = f"Ошибка генерации текста: {e}"
+            await message.channel.send(response)
+        TOKEN = api_key
+        bot.run(TOKEN)
+class gitiybox:
+    def __init__(self):
+        self.gitiybox = []
+    def chats():
+        while True:
+            chat = input("New chat: ")
+            if chat:
+                gitiybox.gitiybox.append(chat)
+                print(f"Chat '{chat}' added to gitiybox.")
+            else:
+                print("Chat name can't be empty.")
+                break
+    def chat(chat, party, action="enter"):
+        if chat in gitiybox:
+            print(f"{action} chat '{chat}' to party.")
+            party.partyGroup.append(chat)
+            while True:
+                message = input(f"{chat}: ")
+                if message:
+                    print(f"{chat}: {message}")
+                else:
+                    print("Message can't be empty.")
+                    break
+                requests.post(message)
+                requests.get()
+        else:
+            print(f"Chat '{chat}' not found in gitiybox.")
