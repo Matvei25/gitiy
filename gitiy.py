@@ -48,7 +48,6 @@ char_groups = {
 def nullCheck(null: typing.Any) -> bool:
     return null == nullnum or null == nullstr or null == nullbool or null == nulllist or null == nulltuple or null == nulldict
 def random_str(k: str) -> str:
-    pass
     k = input()
     ''.join(random.choice(string.ascii_letters + string.digits), k)
 def random_str_char_groups(k: int) -> str:
@@ -70,9 +69,15 @@ class mathbox:
     pi = 3.141592653589793
     e = 2.718281828459045
     fi = 1.618033988749894
+    plank = 6.67430e-11
     inf = numpy.inf
     neginf = -( numpy.inf )
     nan = numpy.nan
+    def is_nan(n):
+        if n+1==n:
+            return numpy.nan_to_num(n)
+        else:
+            return n
     def is_integer(n):
         return isinstance(n, int)
     def is_float(n):
@@ -130,6 +135,22 @@ class mathbox:
         for i in range(2, n):
             fib_seq.append(fib_seq[i-1] + fib_seq[i-2])
         return fib_seq
+class theoryofeverything:
+    def euler_phi_function(n):
+        phi = n
+        for i in range(2, int(math.sqrt(n)) + 1):
+            if n % i == 0:
+                if i * i == n:
+                    phi -= phi // i
+                else:
+                    phi -= (phi // i) + (phi // (n // i))
+        return phi
+    def euler_totient_function(n):
+        phi = n
+        for i in range(2, n+1):
+            if theoryofeverything.is_prime(i):
+                phi -= phi // i
+    plank = 6.67430e-11
 class surreal:
     def __init__(self, real=0, imaginary=0):
         self.real = real
