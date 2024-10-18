@@ -113,9 +113,8 @@ class human:
 class mathbox:
     pi = 3.141592653589793
     e = 2.718281828459045
-    fi = 1.618033988749894
+    golderratio = 1.618033988749894
     strange0304 = 0.30000000000000004
-    plank = 6.67430e-11
     inf = numpy.inf
     neginf = -( numpy.inf )
     nan = numpy.nan
