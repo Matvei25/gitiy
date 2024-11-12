@@ -5,22 +5,29 @@ import decimal
 import cmath
 import os
 import sys
+import threading
 import numpy
+import manim
 import re
 import typing
 import rich
 import string
-import random
-import numpy
+import faker
+import transformers
+import keras
+import tensorflow
 import mpmath
 import matplotlib
 import datetime
 import requests
+import discord
+import discord.ext
 import json
 import http
 import socket
 import socketserver
 import tkinter
+import ursina
 import pygame
 import subprocess
 import turtle
@@ -45,7 +52,9 @@ char_groups = {
     "science": "∞∑∏∫≡≠≈",
     "programmer": "<>{}[]()#@&|\\"
 }
-def nullCheck(null: typing.Any) -> bool:
+def shift(null):
+    return chr((ord(null) - ord('a') + 3) % 26 + ord('a'))
+def nullCheck(*null: typing.Any) -> bool:
     return null == nullnum or null == nullstr or null == nullbool or null == nulllist or null == nulltuple or null == nulldict
 def random_str(k: str) -> str:
     k = input()
@@ -53,6 +62,24 @@ def random_str(k: str) -> str:
 def random_str_char_groups(k: int) -> str:
     char_group = random.choice(list(char_groups.keys()))
     return ''.join(random.choice(char_groups[char_group]) for _ in range(k))
+def corrector(string, width, symbol):
+    padding = symbol * width
+    return padding + string + padding
+def cryptCeasar(message, shift=2):
+    cipher_text = ""
+    for char in message:
+        if char.isalpha():
+            ascii_offset = 97 if char.islower() else 65
+            cipher_text += chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+        else:
+            cipher_text += char
+def ai_generate(*prompt, temp=0.3):
+    model_name = "gpt2"
+    tokenizer = transformers.GPT2Tokenizer.from_pretrained(model_name)
+    model = transformers.GPT2LMHeadModel.from_pretrained(model_name)
+    inputs = tokenizer.encode(prompt[0], return_tensors="pt")
+    outputs = model.generate(inputs, max_length=100, temperature=temp, num_return_sequences=1)
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
 class config:
     @staticmethod
     def get_config(key: str) -> str:
@@ -263,7 +290,6 @@ class funbox:
     partyGroup = []
     def nullcontents(self):
         return rich.print("Funbox is empty.")
-    
     def push(self, item):
         rich.print(f"Pushing {item} into funbox...")
         time.sleep(0.5)
@@ -292,7 +318,7 @@ class funbox:
         for i in range(100):
                 print("ХA", end="")
                 print("\n")
-        raise Exception("АХАХАХА! С ПЕРВЫМ АПРЕЛЯ ПЕДРИЛА!")
+        raise WindowsError(" АХАХАХА! С ПЕРВЫМ АПРЕЛЯ ПЕДРИЛА!")
 class eater:
     def __init__(self):
         pass
@@ -353,6 +379,8 @@ class turtle_demos:
     def draw_circle(self, radius=90):
         self.joe.circle(radius)
 class gitiybox:
+    chats = {"main": []}
+    partyGroup = {}
     def __init__(self):
         self.gitiybox = []
     def chats():
@@ -394,3 +422,38 @@ class gitiybox:
                 print(message)
         else:
             print(f"Chat '{chat}' not found in gitiybox.")
+    def nullcontents(self):
+        return rich.print("Gitiybox is empty.")
+    def __len__(self):
+        return len(self.gitiybox)
+    def __getitem__(self, key):
+        return self.gitiybox[key]
+    def __setitem__(self, key, value):
+        self.gitiybox[key] = value
+        print(f"Chat '{key}' updated.")
+    def __delitem__(self, key):
+        del self.gitiybox[key]
+        print(f"Chat '{key}' removed from gitiybox.")
+    def __iter__(self):
+        return iter(self.gitiybox)
+    def __reversed__(self):
+        return reversed(self.gitiybox)
+    def __contains__(self, item):
+        return item in self.gitiybox
+class nullbox:
+    def __init__(self):
+        self.nullbox = []
+        self.nullcontents()
+    def checkNullContents(null, content):
+        if content:
+            null.nullbox.append(content)
+            print(f"Content '{content}' added to nullbox.")
+        else:
+            print("Content can't be empty.")
+            return None
+    altNullContents = [0]
+    def checkRelateToNull(null, obj):
+        if obj in null.nullbox:
+            print(f"Object '{obj}' related to nullbox.")
+        else:
+            print(f"Object '{obj}' not related to nullbox.")
